@@ -15,7 +15,7 @@ var xmpp = new xmpp.Client({
 });
 
 xmpp.on('stanza', function(stanza) {
-    console.log('Incoming stanza: ', stanza.toString())
+    // console.log('Incoming stanza: ', stanza.toString())
 });
 
 var send = function(to, message) {
