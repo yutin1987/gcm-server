@@ -16,10 +16,10 @@ app.post('/token', function (req, res) {
 });
 
 app.post('/push', function (req, res) {
-  var message = req.body.message;
-  console.log(message);
-  client.lpush('message', message, function (err, reply) {
-    console.log('push', message, err ? 'failed!' : 'ok!');
+  var body = JSON.stringify(req.body);
+  console.log(body);
+  client.lpush('message', body, function (err, reply) {
+    console.log('push', body, err ? 'failed!' : 'ok!');
   });
   res.send('Hello Push!');
 });

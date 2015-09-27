@@ -18,11 +18,11 @@ xmpp.on('stanza', function(stanza) {
     // console.log('Incoming stanza: ', stanza.toString())
 });
 
-var send = function(to, message) {
+var send = function(to, body) {
   var json = {
     "to": to,
     "message_id": crypto.randomBytes(8).toString('hex'),
-    "data": {"message": message},
+    "data": body,
     "time_to_live": 600
   };
 
@@ -32,12 +32,12 @@ var send = function(to, message) {
 var listen = function() {
   client.brpop('message', '0', function(err, reply) {
     if (!err && reply[1]) {
-      var message = reply[1];
-      console.log('snet', message);
+      var body = reply[1];
+      console.log('snet', body);
       client.keys('token:*', function(err, reply) {
         reply.forEach(function(token) {
           token = token.replace(/^token:/gi, '');
-          send(token, message);
+          send(token, JSON.parse(body));
         })
       })
     } else {
