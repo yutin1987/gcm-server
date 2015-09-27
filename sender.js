@@ -29,9 +29,7 @@ var send = function(to, message) {
   xmpp.send('<message id=""><gcm xmlns="google:mobile:data">' + JSON.stringify(json) + '</gcm></message>');
 }
 
-xmpp.on('online', function() {
-  console.log('online');
-
+var listen = function() {
   client.brpop('message', '0', function(err, reply) {
     if (!err && reply[1]) {
       var message = reply[1];
@@ -45,5 +43,12 @@ xmpp.on('online', function() {
     } else {
       console.log('message', err);
     }
+
+    setTimeout(listen);
   });
+}
+
+xmpp.on('online', function() {
+  console.log('online');
+  listen();
 });
