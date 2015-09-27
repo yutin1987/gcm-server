@@ -12,8 +12,8 @@ gcm.on('receipt', function(messageId, from, category, data) {
     console.log('received receipt', arguments);
 });
 
-client.brpop('message', function(err, reply) {
-  if (reply[1]) {
+client.brpop('message', '0', function(err, reply) {
+  if (!err && reply[1]) {
     var message = reply[1];
     client.keys('token:*', function(err, reply) {
       reply.forEach(function(token) {
@@ -31,5 +31,7 @@ client.brpop('message', function(err, reply) {
         );
       })
     })
+  } else {
+    console.log('message', err);
   }
 });
