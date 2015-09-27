@@ -15,7 +15,7 @@ app.post('/token', function (req, res) {
   res.send('Hello Token!');
 });
 
-app.post('/psuh', function (req, res) {
+app.post('/push', function (req, res) {
   var message = req.body.message;
   console.log(message);
   client.lpush('message', 'message', function (err, reply) {
