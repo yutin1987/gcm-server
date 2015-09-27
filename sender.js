@@ -28,6 +28,7 @@ client.brpop('message', function(err, reply) {
               console.log(token, 'failed to send message');
             }
           }
+        );
       })
     })
   }
