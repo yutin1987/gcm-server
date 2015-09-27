@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 app.post('/token', function (req, res) {
   var deviceToken = req.body.deviceToken;
-  client.set(deviceToken, Date.now(), function (err, reply) {
+  client.set('token:'+deviceToken, Date.now(), function (err, reply) {
     console.log('save', deviceToken, err ? 'failed!' : 'ok!');
   });
   res.send('Hello Token!');
