@@ -15,6 +15,7 @@ gcm.on('receipt', function(messageId, from, category, data) {
 client.brpop('message', '0', function(err, reply) {
   if (!err && reply[1]) {
     var message = reply[1];
+    console.log('snet', message);
     client.keys('token:*', function(err, reply) {
       reply.forEach(function(token) {
         token = token.replace(/^token:/gi, '');
