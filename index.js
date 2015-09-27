@@ -4,6 +4,7 @@ var app = express();
 var redis = require("redis"),
     client = redis.createClient()
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.post('/token', function (req, res) {
