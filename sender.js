@@ -18,12 +18,12 @@ client.brpop('message', function(err, reply) {
     client.keys('token:*', function(err, reply) {
       reply.forEach(function(token) {
         token = token.replace(/^token:/gi, '');
-        
+
         gcm.send(
           token,
           { message: message },
           { delivery_receipt_requested: true },
-          function(err, messageId, to)) {
+          function(err, messageId, to) {
             if (err) {
               console.log(token, 'failed to send message');
             }
