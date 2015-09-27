@@ -1,8 +1,8 @@
 var bodyParser = require('body-parser')
 var express = require('express');
 var app = express();
-var redis = require("redis"),
-    client = redis.createClient()
+var redis = require("redis");
+var client = redis.createClient();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
@@ -18,7 +18,7 @@ app.post('/token', function (req, res) {
 app.post('/push', function (req, res) {
   var message = req.body.message;
   console.log(message);
-  client.lpush('message', 'message', function (err, reply) {
+  client.lpush('message', message, function (err, reply) {
     console.log('push', message, err ? 'failed!' : 'ok!');
   });
   res.send('Hello Push!');
