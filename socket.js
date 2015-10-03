@@ -20,12 +20,29 @@ var listen = function() {
   });
 }
 
+var c1 = '';
+var c2 = '';
+
 io.on('connection', function(socket){
   console.log('connection');
 
   socket.on('hello', function(){
     socket.emit('hello', '巨獸搖滾5.0');
   });
+
+  socket.on('c1', function(body){
+    io.sockets.emit('c1', body);
+    c1 = body;
+  });
+
+  socket.on('c2', function(body){
+    io.sockets.emit('c2', body);
+    c2 = body;
+  });
+
+  socket.emit('c1', c1);
+  socket.emit('c2', c2);
+
   socket.on('disconnect', function(){
     console.log('disconnect');
   });
