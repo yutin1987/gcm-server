@@ -22,7 +22,7 @@ var listen = function() {
 
 io.on('connection', function(socket){
   console.log('connection');
-  
+
   socket.on('hello', function(){
     socket.emit('hello', '巨獸搖滾5.0');
   });
@@ -31,3 +31,5 @@ io.on('connection', function(socket){
   });
 });
 server.listen(3000);
+
+listen();
