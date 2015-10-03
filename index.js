@@ -21,6 +21,9 @@ app.post('/push', function (req, res) {
   client.lpush('message', body, function (err, reply) {
     console.log('push', body, err ? 'failed!' : 'ok!');
   });
+  client.lpush('message:socket', body, function (err, reply) {
+    console.log('push', body, err ? 'failed!' : 'ok!');
+  });
   res.send('Hello Push!');
 });
 
